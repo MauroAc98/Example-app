@@ -1,12 +1,13 @@
 
 import './App.css'
+import Header from './components/header'
 
 function App() {
-  
+
   return (
-   <div>
-    <h1>Hola</h1>
-   </div>
+    <div>
+      <Header />
+    </div>
   )
 }
 
