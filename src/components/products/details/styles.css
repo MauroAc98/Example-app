@@ -11,8 +11,8 @@
     transition: all 0.3s ease-in-out;
 }
 
-.cardDetailImageContainer{
-    
+.cardDetailImageContainer {
+    padding: 0rem 1.5rem;
 }
 
 .cardDetailImage {
@@ -45,7 +45,6 @@
     font-size: 1rem;
     padding: 0.3rem 0;
     min-height: 4rem;
-    text-align: center;
 }
 
 .cardDetailPrice {
@@ -60,7 +59,8 @@
     padding: 0.3rem 0;
     font-weight: bold;
 }
-.cardDetailActions{
+
+.cardDetailActions {
     display: flex;
     padding: 1rem 0rem;
 }
@@ -71,25 +71,20 @@
     color: #ffffff;
     padding: 1rem 2rem;
     border-radius: 0.2rem;
-    cursor: pointer;
 }
 
-.headerDetailContainer {
-    display: flex;
-    flex-direction: row;
-    padding: 0.5rem;
+.cardDetailActions button:hover{
+    background-color: #3f428e;
 }
 
-.headerDetailContainer .backButton {
-    border: none;
-    background-color: transparent;
-    font-size: 1rem;
-    padding: 0;
-    margin: 0;
-    transition: all 0.1s ease-in-out;
-}
+@media (max-width:420px) and (orientation:portrait) {
+    .cardDetail {
+        flex-direction: column;
+        height: max-content;
+    }
 
-.headerDetailContainer .backButton:hover {
-    border-bottom: 1px solid #5156A4;
-    scale: 1.02;
+    .cardDetailImage {
+        width: 320px;
+        height: 200px;
+    }
 }
