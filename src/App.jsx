@@ -1,14 +1,32 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 
 import './App.css'
 import Header from './components/header'
-import ItemCount from './components/counter'
 import { useEffect, useState } from 'react'
 import Card from './components/products/card';
+import Input from './components/input';
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [active, setActive] = useState(false);
+  const [task, setTask] = useState('');
+
+  const onChange = (event) => {
+    const value = event.target.value;
+    setTask(value);
+  }
+
+  const onFocus = () => {
+    setActive(true);
+  }
+
+  const onBlur = () => {
+    setActive(false);
+  }
+
+  const inputClass = `container ${active ? 'active' : ''}`
 
   useEffect(() => {
     const getProduct = async () => {
@@ -32,13 +50,25 @@ function App() {
   return (
     <div>
       <Header logo="TDI" />
-      <ItemCount />
-      <div className='cardContainer'>
-        {
-          products.map((product) => (
-            <Card {...product} />
-          ))
-        }
+      <div className='' >
+
+        <Input
+          placeholder='Find a product'
+          id='task'
+          required={true}
+          name='Search'
+          onChange={onChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          className={inputClass}
+        />
+        <div className='cardContainer'>
+          {
+            products.map((product) => (
+              <Card {...product} />
+            ))
+          }
+        </div>
       </div>
     </div>
   )
