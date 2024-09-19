@@ -3,11 +3,12 @@
     border-radius: 0.3rem;
     box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.2);
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
     margin: 0.5rem;
     padding: 1rem;
-    max-width: 400px;
+    width: 432px;
 }
 
 .cardImage {
@@ -21,7 +22,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 .cardName {
@@ -38,14 +38,14 @@
 .containerDescription{
     display: flex;
     align-items: center;
-    width: 70%;
-    height: 80px;
+    width: 80%;
+    min-height: 4rem;
 }
 
 .cardDescription {
     font-size: 0.9rem;
     padding: 0.3rem 0;
-    text-align: justify;
+    text-align: center;
 }
 
 .cardPrice {

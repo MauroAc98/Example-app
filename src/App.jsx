@@ -50,18 +50,20 @@ function App() {
   return (
     <div>
       <Header logo="TDI" />
-      <div className='' >
-
-        <Input
-          placeholder='Find a product'
-          id='task'
-          required={true}
-          name='Search'
-          onChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          className={inputClass}
-        />
+      <div className='contentContainer'>
+        <div className='inputContainer' >
+          <Input
+            placeholder='find a product'
+            id='task'
+            required={true}
+            name='Search'
+            onChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            className={inputClass}
+          />
+        </div>
+        <h2 className='headerTitleCard'>Products</h2>
         <div className='cardContainer'>
           {
             products.map((product) => (

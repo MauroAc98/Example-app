@@ -15,9 +15,25 @@ a {
 ul {
     list-style: none;
 }
-.cardContainer{
+
+.contentContainer {
+    margin: 1rem 1.8rem;
+}
+
+.inputContainer {
+    width: 100%;
+    padding: 0 2rem;
+}
+
+.headerTitleCard {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 1rem 2rem;
+}
+
+.cardContainer {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    flex: 1;
+    justify-content: center;
+    align-items: center;
 }
