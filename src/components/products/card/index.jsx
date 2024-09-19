@@ -1,16 +1,16 @@
-import './style.css';
+import './styles.css';
 
 // eslint-disable-next-line react/prop-types
-const Card = ({ id, image, name, category, description, price, stock, onAddToCart }) => {
+const Card = ({ id, image, name, category, description, price, stock, onAddToCart, onShowDetails }) => {
     return (
-        <div key={id} className='card'>
+        <div key={id} className='card' onClick={() => onShowDetails(id)}>
             <img className='cardImage' src={image} alt={name} />
             <div className='cardContent'>
                 <h3 className='cardName'>{name}</h3>
                 <p className='cardCategory'>{category}</p>
-                <div className='containerDescription'>
-                    <p className='cardDescription'>{description}</p>
-                </div>
+
+                <p className='cardDescription'>{description}</p>
+
                 <p className='cardPrice'>USD{price}</p>
                 <p className='cardStock'>{stock} ud.</p>
             </div>
