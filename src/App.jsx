@@ -4,18 +4,21 @@
 
 import './App.css'
 import Header from './components/header'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Card from './components/products/card';
 import Input from './components/input';
 import Details from './components/products/details';
+import { useFetch } from './hooks/useFetch';
+import { API_URLS } from '../src/constants/index'
 
 function App() {
-  const [products, setProducts] = useState([]);
   const [active, setActive] = useState(false);
   const [search, setSearch] = useState('');
   const [showDetails, setShowDetails] = useState(false);
   const [productDetail, setProductDetail] = useState(null);
   const [productFiltered, setProductFiltered] = useState([]);
+
+  const { data: products } = useFetch(API_URLS.PRODUCTS.url, API_URLS.PRODUCTS.config);
 
   const onChange = (event) => {
     const value = event.target.value;
@@ -46,24 +49,6 @@ function App() {
   }
 
   const inputClass = `container ${active ? 'active' : ''}`
-
-  useEffect(() => {
-    const getProduct = async () => {
-      try {
-        const response = await fetch('https://66eb2ace55ad32cda47be148.mockapi.io/products', {
-          method: 'GET',
-          header: {
-            'Content-Type': 'application/json',
-          },
-        });
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getProduct();
-  }, [])
 
 
   return (
