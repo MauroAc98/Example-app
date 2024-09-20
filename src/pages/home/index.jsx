@@ -7,14 +7,15 @@ import { useFetch } from '../../hooks/useFetch';
 import { API_URLS } from '../../constants/index'
 import Loader from '../../components/loader';
 import { useNavigate } from 'react-router-dom';
+import Slider from '../../components/slider';
 
 function Home() {
   const [active, setActive] = useState(false);
   const [search, setSearch] = useState('');
   const [productFiltered, setProductFiltered] = useState([]);
   const navigate = useNavigate();
-
-  const { data: products, loading, error } = useFetch(API_URLS.PRODUCTS.url, API_URLS.PRODUCTS.config);
+  const { data: products, loading: loadingProducts, error: errorProducts } = useFetch(API_URLS.PRODUCTS.url, API_URLS.PRODUCTS.config);
+  const { data: categories, loading: loadingCategories, error: errorCategories } = useFetch(API_URLS.CATEGORIES.url, API_URLS.CATEGORIES.config);
 
   const onChange = (event) => {
     const value = event.target.value;
@@ -47,6 +48,19 @@ function Home() {
   return (
     <div>
       <div className='contentContainer'>
+        <div className='categoriesContainer'>
+          {loadingCategories && <Loader />}
+          {errorCategories && <h2>{errorCategories}</h2>}
+          <Slider>
+            {
+              categories.map((category) => (
+                <div key={category.id} className='categoryContainer'>
+                  <p className='categoryName'>{category.name}</p>
+                </div>
+              ))
+            }
+          </Slider>
+        </div>
         <div className='inputContainer' >
           <Input
             placeholder='find a product'
@@ -61,8 +75,8 @@ function Home() {
         </div>
         <h2 className='headerTitleCard'>Products</h2>
         <div className='cardContainer'>
-          {loading && <Loader />}
-          {error && <h3>{error}</h3>}
+          {loadingProducts && <Loader />}
+          {errorProducts && <h3>{errorProducts}</h3>}
           {search.length > 0 && productFiltered.length === 0 && <h2>Product not fount</h2>}
           {
             search.length > 0 ? (
