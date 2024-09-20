@@ -1,6 +1,7 @@
 .slider {
     overflow: hidden;
     position: relative;
+    margin: 1rem 0;
 }
 
 .sliderContent {
@@ -9,6 +10,8 @@
     gap: 0.5rem;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    cursor: pointer;
+    padding: 0 3rem;
 }
 
 .nextButton,
@@ -23,6 +26,8 @@
     align-items: center;
     background-color: #000000;
     border-radius: 0.5rem;
+    color: #ffffff;
+    font-size: 1.5rem;
 }
 
 .nextButton {
@@ -32,5 +37,12 @@
 .previousButton span,
 .nextButton span {
     font-size: 1.5rem;
-    color: #ffffff;
+}
+
+.nextButton:active,
+.previousButton:active,
+.nextButton:hover,
+.previousButton:hover {
+    background-color: #ffffff;
+    color: #000000;
 }
