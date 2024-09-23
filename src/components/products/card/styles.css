@@ -76,3 +76,12 @@
     cursor: pointer;
 }
 
+.cartButtonContainer {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.cartButtonContainer:active {
+    outline: none;
+}

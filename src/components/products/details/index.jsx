@@ -11,7 +11,7 @@ const Details = ({ id, image, name, category, description, price, stock, onAddTo
                 <h3 className='cardDetailName'>{name}</h3>
                 <p className='cardDetailCategory'>{category}</p>
                 <p className='cardDetailDescription'>{description}</p>
-                <p className='cardDetailPrice'>USD{price}</p>
+                <p className='cardDetailPrice'>USD {price}</p>
                 <p className='cardDetailStock'>{stock} ud.</p>
                 <div className='cardDetailActions'>
                     <button className='cardButton' onClick={() => onAddToCart(id)}>Add to cart</button>

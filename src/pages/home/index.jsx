@@ -14,6 +14,7 @@ function Home() {
   const [search, setSearch] = useState('');
   const [productFiltered, setProductFiltered] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
+  const [cart, setCart] = useState([])
   const navigate = useNavigate();
 
   const { data: products, loading: loadingProducts, error: errorProducts } = useFetch(API_URLS.PRODUCTS.url, API_URLS.PRODUCTS.config);
@@ -50,6 +51,28 @@ function Home() {
     setIsFiltered(true)
     const productsByCategory = products.filter((product) => product.category === name);
     setProductFiltered(productsByCategory);
+  }
+
+  const onAddToCart = (id) => {
+    const item = products.find((product) => product.id === id);
+    if (cart?.find((product) => product.id === id)?.quantity === Number(item.stock)) return;
+    if (cart?.length === 0) {
+      setCart([{ ...item, quantity: 1 }])
+    }
+    if (cart?.length > 0 && !cart?.find((product) => product.id === id)) {
+      setCart([...cart, { ...item, quantity: 1 }])
+    }
+    if (cart?.length > 0 && cart?.find((product) => product.id === id)) {
+      setCart((currentCart) => {
+        return currentCart.map((product) => {
+          if (product.id === id) {
+            return { ...product, quantity: product.quantity + 1 }
+          } else {
+            return product;
+          }
+        })
+      })
+    }
   }
 
   const inputClass = `container ${active ? 'active' : ''}`
@@ -93,12 +116,12 @@ function Home() {
           {
             isFiltered ? (
               productFiltered.map((product) => (
-                <Card key={product.id} {...product} onShowDetails={onShowDetails} />
+                <Card key={product.id} {...product} onAddToCart={onAddToCart} onShowDetails={onShowDetails} />
               ))
             )
               : (
                 products.map((product) => (
-                  <Card key={product.id} {...product} onShowDetails={onShowDetails} />
+                  <Card key={product.id} {...product} onAddToCart={onAddToCart} onShowDetails={onShowDetails} />
                 ))
               )
           }
