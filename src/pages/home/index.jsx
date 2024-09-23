@@ -2,7 +2,7 @@
 import './styles.css'
 import { useState } from 'react'
 import Card from '../../components/products/card';
-import Input from '../../components/input';
+// import Input from '../../components/input';
 import { useFetch } from '../../hooks/useFetch';
 import { API_URLS } from '../../constants/index'
 import Loader from '../../components/loader';
@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import Slider from '../../components/slider';
 
 function Home() {
-  const [active, setActive] = useState(false);
+  // const [active, setActive] = useState(false);
   const [search, setSearch] = useState('');
   const [productFiltered, setProductFiltered] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
@@ -20,27 +20,27 @@ function Home() {
   const { data: products, loading: loadingProducts, error: errorProducts } = useFetch(API_URLS.PRODUCTS.url, API_URLS.PRODUCTS.config);
   const { data: categories, loading: loadingCategories, error: errorCategories } = useFetch(API_URLS.CATEGORIES.url, API_URLS.CATEGORIES.config);
 
-  const onChange = (event) => {
-    const value = event.target.value;
-    setSearch(value);
-    filterBySearch(value);
-  }
+  // const onChange = (event) => {
+  //   const value = event.target.value;
+  //   setSearch(value);
+  //   filterBySearch(value);
+  // }
 
-  const filterBySearch = (query) => {
-    let updateProductList = [...products];
-    updateProductList = updateProductList.filter((item) => {
-      return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-    })
-    setProductFiltered(updateProductList)
-  }
+  // const filterBySearch = (query) => {
+  //   let updateProductList = [...products];
+  //   updateProductList = updateProductList.filter((item) => {
+  //     return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+  //   })
+  //   setProductFiltered(updateProductList)
+  // }
 
-  const onFocus = () => {
-    setActive(true);
-  }
+  // const onFocus = () => {
+  //   setActive(true);
+  // }
 
-  const onBlur = () => {
-    setActive(false);
-  }
+  // const onBlur = () => {
+  //   setActive(false);
+  // }
 
   const onShowDetails = (id) => {
     navigate(`/products/${id}`)
@@ -75,11 +75,65 @@ function Home() {
     }
   }
 
-  const inputClass = `container ${active ? 'active' : ''}`
+  const onDecreaseCartItem = (id) => {
+
+    if (cart?.find((product) => product.id === id)?.quantity === 1) return;
+    if (cart?.length > 0 && cart?.find((product) => product.id === id)) {
+      setCart((currentCart) => {
+        return currentCart.map((product) => {
+          if (product.id === id) {
+            return { ...product, quantity: product.quantity - 1 }
+          } else {
+            return product;
+          }
+        })
+      })
+    }
+  }
+
+  const onRemoveCartItem = (id) => {
+    setCart((currentCart) => {
+      return currentCart.filter((product) => product.id !== id)
+    })
+  }
+
+  const sumTotalCart = cart.reduce((acc, product) => acc + (product.price * product.quantity), 0)
+
+
+  // const inputClass = `container ${active ? 'active' : ''}`
 
   return (
     <div>
       <div className='contentContainer'>
+
+        <h2>Cart</h2>
+        <div className='cartContainer'>
+          {cart.length === 0 && <h3>Cart is empty</h3>}
+          {
+            cart?.length > 0 && cart.map((product) => (
+              <div key={product.id} className='cartItem'>
+                <div className='cardImageContainer'>
+                  <img className='cardImage' src={product.image} alt={product.name} />
+                </div>
+                <div className='cartContentContainer'>
+                  <p className='cartProductName'>{product.name}</p>
+                  <p className='cartPrice'>USD {product.price}</p>
+                  <p className='cartQuantity'>qty: {product.quantity}</p>
+                  <p className='cartStock'>{product.stock}</p>
+                  <div className='cartActions'>
+                    <button onClick={() => onAddToCart(product.id)} className='cartButtonAdd'>+</button>
+                    <button onClick={() => onDecreaseCartItem(product.id)} className='cartButtonDecrease'>-</button>
+                    <button onClick={() => onRemoveCartItem(product.id)} className='cartButtonRemove'>Remove</button>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+          {
+            cart?.length > 0 && <p>Total: USD {sumTotalCart}</p>
+          }
+        </div>
+
         <div className='categoriesContainer'>
           {loadingCategories && <Loader />}
           {errorCategories && <h2>{errorCategories}</h2>}
@@ -96,7 +150,7 @@ function Home() {
             }
           </Slider>
         </div>
-        <div className='inputContainer' >
+        {/* <div className='inputContainer' >
           <Input
             placeholder='find a product'
             id='task'
@@ -107,7 +161,7 @@ function Home() {
             onBlur={onBlur}
             className={inputClass}
           />
-        </div>
+        </div> */}
         <h2 className='headerTitleCard'>Products</h2>
         <div className='cardContainer'>
           {loadingProducts && <Loader />}
@@ -130,7 +184,7 @@ function Home() {
           }
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
