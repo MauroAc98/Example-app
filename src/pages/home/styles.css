@@ -37,12 +37,24 @@ ul {
     flex: 1;
     align-items: center;
     justify-content: center;
-    gap:0.2rem;
+    gap: 0.2rem;
     overflow: hidden;
 }
 
-.categoryContainer{
+.categoryContainer {
     min-width: 200px;
-    background-color: #5156A4;
+    background-color: #CBBAED;
     padding: 1rem;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    color: #000000;
+}
+
+.categoryContainer:hover {
+    background-color: #BAA6D2;
+    color: #ffffff;
+}
+
+.categoryName {
+    font-size: 1rem;
 }

@@ -77,7 +77,7 @@
     background-color: #3f428e;
 }
 
-@media (max-width:420px) and (orientation:portrait) {
+@media (max-width:768px) and (orientation:portrait) {
     .cardDetail {
         flex-direction: column;
         height: max-content;

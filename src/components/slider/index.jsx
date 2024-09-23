@@ -15,18 +15,17 @@ const Slider = ({ children }) => {
         sliderContentRef.current.scrollLeft -= sliderContentRef.current.children[0].offsetWidth;
     }
 
+    // const onHandleMouseDown = (event) => {
+    //     startX.current = event.pageX - sliderContentRef.current.offsetLeft;
+    //     scrollLeft.current = sliderContentRef.current.scrollLeft;
+    // }
 
-    const onHandleMouseDown = (event) => {
-        startX.current = event.pageX - sliderContentRef.current.offsetLeft;
-        scrollLeft.current = sliderContentRef.current.scrollLeft;
-    }
-
-    const onHandleMouseMove = (event) => {
-        event.preventDefault();
-        const x = event.pageX - sliderContentRef.current.offsetLeft;
-        const walk = (x - startX.current) * 3;
-        sliderContentRef.current.scrollLeft = scrollLeft.current - walk;
-    }
+    // const onHandleMouseMove = (event) => {
+    //     event.preventDefault();
+    //     const x = event.pageX - sliderContentRef.current.offsetLeft;
+    //     const walk = (x - startX.current) * 2;
+    //     sliderContentRef.current.scrollLeft = scrollLeft.current - walk;
+    // }
     const onHandleTouchStart = (event) => {
         startX.current = event.touches[0].clientX - sliderContentRef.current.offsetLeft;
         scrollLeft.current = sliderContentRef.current.scrollLeft;
@@ -45,8 +44,8 @@ const Slider = ({ children }) => {
             <button type='button' onClick={onHandleClickNext} className='nextButton'><span>&gt;</span></button>
             <div ref={sliderContentRef}
                 className='sliderContent'
-                onMouseDown={onHandleMouseDown}
-                onMouseMove={onHandleMouseMove}
+                // onMouseDown={onHandleMouseDown}
+                // onMouseMove={onHandleMouseMove}
                 onTouchStart={onHandleTouchStart}
                 onTouchMove={onHandleTouchMove}
             >
