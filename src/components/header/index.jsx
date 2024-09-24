@@ -4,7 +4,7 @@
 import React, { useContext } from "react";
 import './styles.css';
 import { CartContext } from "../../context/cartContext"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Header = ({ logo }) => {
 
@@ -16,7 +16,7 @@ const Header = ({ logo }) => {
     }
     return (
         <header className="header">
-            <a href="/" className="logo">{logo}</a>
+            <Link to='/' className="logo">{logo}</Link>
             <input type="checkbox" className="side-menu" id="side-menu" />
             <label className="hamb" htmlFor="side-menu">
                 <span className="hamb-line"></span>
